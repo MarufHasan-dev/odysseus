@@ -3238,6 +3238,14 @@ function _wheelNav(e) {
   _render();
 }
 
+function _collapseMobileSidebar() {
+  if (window.innerWidth <= 768) {
+    const sb = document.getElementById('sidebar');
+    if (sb) sb.classList.add('hidden');
+    document.body.classList.add('sidebar-collapsed');
+  }
+}
+
 function openCalendar() {
   if (_open) return;
   // If currently minimized — restore in place, preserve all state
@@ -3248,6 +3256,7 @@ function openCalendar() {
   }
   _open = true;
   if (_todayCount() > 0) { _markBadgeSeen(); _updateBadge(); }
+  _collapseMobileSidebar();
   const modal = _getModal();
   // Clean up any leftover state from a previous swipe-dismiss
   modal.classList.remove('hidden', 'modal-minimized');
@@ -3264,7 +3273,7 @@ function openCalendar() {
     railBtnId: 'rail-calendar',
     sidebarBtnId: 'tool-calendar-btn',
     closeFn: () => _doCloseCalendar(),
-    restoreFn: () => {},
+    restoreFn: () => { _collapseMobileSidebar(); },
   });
   _currentDate = new Date();
   _selectedDay = _today();  // auto-show today's events on open
