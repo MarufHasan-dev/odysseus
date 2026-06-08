@@ -11,6 +11,7 @@ import { isAltGrEvent } from './platform.js';
 
 let initialized = false;
 let modalEl = null;
+let _closeTimeout = null;
 
 function el(id) { return document.getElementById(id); }
 function esc(s) { return uiModule.esc(s); }
@@ -5221,6 +5222,8 @@ function syncAdminVisibility() {
    ═══════════════════════════════════════════ */
 export function open(tab) {
   if (!initialized) initAll();
+  clearTimeout(_closeTimeout);
+  _closeTimeout = null;
   syncAppearanceCheckboxes();
   // If the modal was minimized to a dock chip, restore it through the modal
   // manager — CSS uses .modal-minimized { display: none !important } which
@@ -5266,7 +5269,8 @@ export function close() {
       modalEl.classList.add('hidden');
       content.classList.remove('modal-closing');
     }, { once: true });
-    setTimeout(() => { if (!modalEl.classList.contains('hidden')) { modalEl.classList.add('hidden'); content.classList.remove('modal-closing'); } }, 250);
+    clearTimeout(_closeTimeout);
+    _closeTimeout = setTimeout(() => { if (!modalEl.classList.contains('hidden')) { modalEl.classList.add('hidden'); content.classList.remove('modal-closing'); } _closeTimeout = null; }, 250);
   } else {
     modalEl.classList.add('hidden');
   }
