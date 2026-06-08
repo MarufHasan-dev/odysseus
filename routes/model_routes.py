@@ -740,7 +740,7 @@ def _probe_endpoint(base_url: str, api_key: str = None, timeout: int = 5) -> Lis
                 for _e in _PROVIDER_CURATED.get(_ck, []):
                     if _e not in set(models) and not any(m.startswith(_e) for m in models):
                         models.append(_e)
-            return models
+            return [m for m in models if _is_chat_model(m)]
     except httpx.HTTPStatusError as e:
         if api_key:
             status = e.response.status_code if e.response is not None else "unknown"
@@ -764,7 +764,7 @@ def _probe_endpoint(base_url: str, api_key: str = None, timeout: int = 5) -> Lis
             data = r.json()
             models = [m.get("name") or m.get("model") for m in (data.get("models") or []) if m.get("name") or m.get("model")]
             if models:
-                return models
+                return [m for m in models if _is_chat_model(m)]
     except Exception as e:
         logger.debug(f"Ollama /api/tags probe failed for {base}: {e}")
     # Fall back to curated list if the provider has a URL-based match (e.g. z.ai has no /models endpoint)
