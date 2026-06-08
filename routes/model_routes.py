@@ -480,13 +480,16 @@ _NON_CHAT_PREFIXES = (
     "davinci", "babbage", "moderation", "omni-moderation",
     "sora", "gpt-image", "chatgpt-image",
     # embedding / retrieval / non-chat models (common across providers)
-    "bge", "snowflake/arctic-embed", "nvidia/nv-embed",
+    "bge", "snowflake/arctic-embed", "nvidia/nv-embed", "embed",
+    "recurrent",
 )
 _NON_CHAT_CONTAINS = (
     "-realtime", "-transcribe", "-tts", "-codex",
     "codex-", "content-safety", "-safety", "-reward", "nvclip",
     "kosmos", "fuyu", "deplot", "vila", "neva",
     "gliner", "riva", "-parse", "-embedqa", "-nemoretriever",
+    "topic-control", "guard", "calibration",
+    "ai-synthetic-video", "cosmos-reason2",
 )
 _NON_CHAT_EXACT_PREFIXES = (
     "gpt-audio",  # gpt-audio, gpt-audio-mini etc. (not gpt-4o-audio-preview which is chat)
