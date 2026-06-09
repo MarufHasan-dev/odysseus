@@ -284,7 +284,6 @@ _HOST_TO_CURATED = (
     ("googleapis.com", "google"),
     ("x.ai", "xai"),
     ("nvidia.com", "nvidia"),
-
     ("openrouter.ai", "openrouter"),
     ("ollama.com", "ollama"),
 )
@@ -480,7 +479,7 @@ _NON_CHAT_PREFIXES = (
     "davinci", "babbage", "moderation", "omni-moderation",
     "sora", "gpt-image", "chatgpt-image",
     # embedding / retrieval / non-chat models (common across providers)
-    "bge", "snowflake/arctic-embed", "nvidia/nv-embed", "embed",
+    "snowflake/arctic-embed", "nvidia/nv-embed", "embed",
 )
 _NON_CHAT_CONTAINS = (
     "-realtime", "-transcribe", "-tts", "-codex",
@@ -489,7 +488,7 @@ _NON_CHAT_CONTAINS = (
     "gliner", "riva", "-parse", "-embedqa", "-nemoretriever",
     "topic-control", "calibration",
     "ai-synthetic-video", "cosmos-reason2",
-
+    "bge", "llama-guard",
 )
 _NON_CHAT_EXACT_PREFIXES = (
     "gpt-audio",  # gpt-audio, gpt-audio-mini etc. (not gpt-4o-audio-preview which is chat)
